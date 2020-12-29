@@ -15,15 +15,26 @@ struct ScrumsView: View {
             
 
             ForEach(scrums) { (scrum) in
-                CardView(scrum: scrum)
+                NavigationLink(
+                    destination: Text(scrum.title),
+                    label: {
+                        CardView(scrum: scrum)
+                    })
                     .listRowBackground(scrum.color)
+                
             }
         }
+        .navigationTitle("Daily Scrum")
+        .navigationBarItems(trailing: Button(action: {}) {
+            Image(systemName: "plus")
+        })
     }
 }
 
 struct ScrumsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScrumsView(scrums: DailyScrum.data)
+        NavigationView {
+            ScrumsView(scrums: DailyScrum.data)
+        }
     }
 }
